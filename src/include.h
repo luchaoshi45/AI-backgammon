@@ -8,5 +8,5 @@
 #endif //AI_BACKGAMMON_INCLUDE_H
 
 
-#define False 0
+#define False 0 // ผู
 #define True 1
