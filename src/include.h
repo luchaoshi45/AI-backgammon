@@ -8,5 +8,5 @@
 #endif //AI_BACKGAMMON_INCLUDE_H
 
 
-#define False 0 // ¼Ù
+#define False 0 // ¼ÙµÄ
 #define True 1
