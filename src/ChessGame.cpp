@@ -10,15 +10,21 @@
 void ChessGame::play(){
 
     while(True){
-        man.go();
-        if(chess.checkOver()){
+        man->go(chess);
+        if(chess->checkOver()){
             break;
         }
-        ai.go();
-        if(chess.checkOver()){
+        ai->go(chess);
+        if(chess->checkOver()){
             break;
         }
     }
 
 
+}
+
+void ChessGame::run() {
+    while (True) {
+        play();
+    }
 }

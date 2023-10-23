@@ -10,11 +10,17 @@
 
 class Man
 {
+private:
+    chess_kind_t chees_color;  // False CHESS_BLACK = 0 ºÚ·½    True CHESS_WHITE = 1  °×·½
 public:
     Man(){
+        chees_color = CHESS_BLACK;
         std::cout << "Man\n";
     };
-    void go();
+    ~Man() {
+        std::cout << "~Man\n";
+    };
+    void go(Chess* chess);
 };
 
 #endif //AI_BACKGAMMON_MAN_H

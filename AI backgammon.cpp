@@ -7,14 +7,16 @@
 #include "./src/AI.h"
 #include "./src/Chess.h"
 #include "./src/ChessGame.h"
+#include<Windows.h>
 
 
 
 int main() {
 
     ChessGame cg;
-    cg.play();
 
+    cg.run();
+    
     return 0;
 }
 
