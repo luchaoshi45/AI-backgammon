@@ -6,14 +6,33 @@
 using namespace std;
 
 void AI::init(Chess* chess) {
-    vector<int> row;
 	int size = chess->get_grade_num() + 1;
-    for (int j = 0; j < size; j++) {
-        row.push_back(0);
-    }
-    for (int i = 0; i < size; i++) {
-        scoreMap.push_back(row);
-    }
+	if (scoreMap.size() == 0) {
+		vector<int> row;
+		for (int j = 0; j < size; j++) {
+			row.push_back(0);
+		}
+		for (int i = 0; i < size; i++) {
+			scoreMap.push_back(row);
+		}
+	}
+	else {
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				scoreMap[i][j] = CHESS_NULL;
+			}
+		}
+	}
+}
+void AI::scoreMap_pad_zero(Chess* chess) {
+	int size = chess->get_grade_num() + 1;
+	std::vector<int> tmp;
+	for (int i = 0; i < size; i++) {
+		tmp.push_back(0);
+	}
+	for (int i = 0; i < size; i++) {
+		scoreMap.push_back(tmp);
+	}
 }
 
 void AI::go(Chess* chess){

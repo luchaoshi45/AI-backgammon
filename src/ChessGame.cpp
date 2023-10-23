@@ -9,6 +9,8 @@
 // 单个对局开始
 void ChessGame::play(){
 
+    chess->init();
+    ai->init(chess);
     while(True){
         man->go(chess);
         if(chess->checkOver()){
@@ -26,7 +28,8 @@ void ChessGame::play(){
 void ChessGame::run() {
     while (True) {
         play();
-        std::cout << "ok\n";
-        break;
+        Sleep(3000);
+        //break;
+        //_getch();
     }
 }

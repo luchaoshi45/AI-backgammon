@@ -26,6 +26,7 @@ public:
     };
     void init(Chess* chess);
     void go(Chess* chess);
+    void scoreMap_pad_zero(Chess* chess);
 };
 
 

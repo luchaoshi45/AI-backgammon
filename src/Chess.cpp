@@ -174,7 +174,7 @@ bool Chess::checkOver(){
 			vector_ai();
 		}
 
-		_getch(); // 补充头文件 #include <conio.h>
+		//_getch(); // 补充头文件 #include <conio.h>
 		return True;
 	}
 

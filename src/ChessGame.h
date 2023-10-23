@@ -17,10 +17,10 @@ class ChessGame
 public:
     ChessGame(){
         chess = new Chess(13-1, 6890, 800, {481,541}, {6412,6413}, 40);
-        chess->init();
+        //chess->init();
         
         ai = new AI();
-        ai->init(chess);
+        /*ai->init(chess);*/
         man = new Man;  // 分配内存 调用构造函数
 
         std::cout << "ChessGame\n";

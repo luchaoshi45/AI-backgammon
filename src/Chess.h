@@ -60,12 +60,22 @@ public:
     };
     void chessMap_pad_null() {
         std::vector<int> tmp;
-        for (int i = 0; i < grade_num+1; i++) {
-            tmp.push_back(CHESS_NULL);
+        if (chessMap.size() == 0) {
+            for (int j = 0; j < grade_num + 1; j++) {
+                tmp.push_back(CHESS_NULL);
+            }
+            for (int j = 0; j < grade_num + 1; j++) {
+                chessMap.push_back(tmp);
+            }
         }
-        for (int i = 0; i < grade_num+1; i++) {
-            chessMap.push_back(tmp);
-        }
+        else
+        {
+            for (int i = 0; i < grade_num + 1; i++) {
+                for (int j = 0; j < grade_num + 1; j++) {
+                    chessMap[i][j] = CHESS_NULL;
+                }
+            }
+        } 
     }
     void init() {
         initgraph(win_resize, win_resize);
@@ -85,15 +95,17 @@ public:
         int b = mciSendString("play sfx_hit from 1000", NULL, 0, NULL);
     }
     void vector_man() {
-        mciSendString("stop BGM1", 0, 0, 0);
+        mciSendString("close BGM1", 0, 0, 0);
         mciSendString("play ./res/music/over/vector.wav", 0, 0, 0);
+        initgraph(1300, 700);
         loadimage(0, "./res/img/over/vector.png", 1300, 700);
     }
     void vector_ai() {
-        mciSendString("stop BGM1", 0, 0, 0);
-        mciSendString("play ./res/music/over/fail.wav", 0, 0, 0);
 
-        loadimage(0, "./res/img/over/vector.png", 1300, 700);
+        mciSendString("close BGM1", 0, 0, 0);
+        mciSendString("play ./res/music/over/fail.wav", 0, 0, 0);
+        initgraph(1300, 700);
+        loadimage(0, "./res/img/over/fail.jpg", 1300, 700);
     }
 
     // 判断在指定坐标(x,y)位置，是否是有效点击
