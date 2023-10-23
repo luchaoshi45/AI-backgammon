@@ -14,6 +14,7 @@ void Man::go(Chess* chess) {
 
                 chess->set_chessMap(&pos, chees_color);
                 chess->chessDown(&pos, chees_color);
+                // Sleep(1000); //Âä×ÓÉùÒôË¼¿¼
                 //std::cout << "ok WM_LBUTTONDOWN\n";
                 break;
             }

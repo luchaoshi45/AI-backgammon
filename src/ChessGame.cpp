@@ -26,5 +26,7 @@ void ChessGame::play(){
 void ChessGame::run() {
     while (True) {
         play();
+        std::cout << "ok\n";
+        break;
     }
 }

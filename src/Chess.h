@@ -12,6 +12,8 @@
 #pragma comment(lib, "winmm.lib")
 #include "include.h"
 #include <math.h>
+#include <conio.h>
+#include<Windows.h>
 
 typedef enum {
     CHESS_NULL = -1,
@@ -68,12 +70,30 @@ public:
     void init() {
         initgraph(win_resize, win_resize);
         loadimage(0, "./res/img/chess/chess_13.png", win_resize, win_resize);
-        mciSendString("play ./res/music/chun_shan_yue.mp3", 0, 0, 0);
+        //mciSendString("open ./res/music/chun_shan_yue.mp3 alias BGM1", 0, 0, 0);
+        mciSendString("open ./res/music/llusionary_Daytime.mp3 alias BGM1", 0, 0, 0);
+        mciSendString("play BGM1 repeat", 0, 0, 0);
+
+        mciSendString("open ./res/music/chess/chess.mp3 alias sfx_hit", NULL, 0, NULL);
 
         loadimage(&chessBlackImg, "./res/img/piece/black.png", chess_size, chess_size, true);
         loadimage(&chessWhiteImg, "./res/img/piece/white.png", chess_size, chess_size, true);
         
         chessMap_pad_null();
+    }
+    void chessDown_music() {
+        int b = mciSendString("play sfx_hit from 1000", NULL, 0, NULL);
+    }
+    void vector_man() {
+        mciSendString("stop BGM1", 0, 0, 0);
+        mciSendString("play ./res/music/over/vector.wav", 0, 0, 0);
+        loadimage(0, "./res/img/over/vector.png", 1300, 700);
+    }
+    void vector_ai() {
+        mciSendString("stop BGM1", 0, 0, 0);
+        mciSendString("play ./res/music/over/fail.wav", 0, 0, 0);
+
+        loadimage(0, "./res/img/over/vector.png", 1300, 700);
     }
 
     // 判断在指定坐标(x,y)位置，是否是有效点击
@@ -93,7 +113,9 @@ public:
     int getChessData(int row, int col);
 
     // 判断棋局是否结束
+    bool checkWin();
     bool checkOver();
+    
 private:
     IMAGE chessBlackImg;
     IMAGE chessWhiteImg;
@@ -110,6 +132,9 @@ private:
     float chess_size; // 棋子大小
 
     std::vector< std::vector<int> >chessMap;
+
+    ChessPos lastPos; //最近落子位置, Chess的private数据成员
+    chess_kind_t playerFlag;
     
 };
 
