@@ -6,18 +6,16 @@
 
 void Man::go(Chess* chess) {
     ChessPos pos;
-    while (true)
-    {
-        MOUSEMSG msg = GetMouseMsg();
-        if (msg.uMsg == WM_LBUTTONDOWN) {
+    while (true){
+        volatile ExMessage msg = getmessage(EX_MOUSE); // 一定要清空消息队列
+        if (msg.message == WM_LBUTTONDOWN) {
             if (chess->clickBoard(msg.x, msg.y, &pos)) {
 
                 chess->set_chessMap(&pos, chees_color);
                 chess->chessDown(&pos, chees_color);
-                // Sleep(1000); //落子声音思考
-                //std::cout << "ok WM_LBUTTONDOWN\n";
                 break;
             }
         }
+
     }
 }

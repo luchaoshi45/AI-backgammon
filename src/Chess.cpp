@@ -20,35 +20,46 @@ bool Chess::clickBoard(int x, int y, ChessPos* pos){
 	float left_x = margin.x + left_top_col * grade_size.x;
 	float top_y = margin.y + left_top_row * grade_size.y;
 
-	// 圆形算法
-	float YUXZHI = pow(grade_size.x * 0.4f, 2) + pow(grade_size.y * 0.4f, 2);
-	multimap<float, unsigned int> map4;
-	for (unsigned int i = 0; i < 4; i++) {
-		unsigned int dx = i & 0x01;
-		unsigned int dy = (i & 0x02) >> 1;
-		float res = pow(x - dx * grade_size.x - left_x, 2) + pow(y - dy * grade_size.y - top_y, 2);
-		map4.insert(make_pair(res, i));
-	}
-	if (map4.begin()->first < YUXZHI) {
-		unsigned int add_x = (map4.begin()->second) & 0x01;
-		pos->col = left_top_col + add_x;
-		unsigned int add_y = ((map4.begin()->second) & 0x02) >> 1;
-		pos->row = left_top_row + add_y;
-		return True;
-	}
-	return False;
+	//// 圆形算法
+	//float YUXZHI = pow(grade_size.x * 0.4f, 2) + pow(grade_size.y * 0.4f, 2);
+	//multimap<float, unsigned int> map4;
+	//for (unsigned int i = 0; i < 4; i++) {
+	//	unsigned int dx = i & 0x01;
+	//	unsigned int dy = (i & 0x02) >> 1;
+	//	float res = pow(x - dx * grade_size.x - left_x, 2) + pow(y - dy * grade_size.y - top_y, 2);
+	//	map4.insert(make_pair(res, i));
+	//}
+	//if (map4.begin()->first < YUXZHI) {
+	//	unsigned int add_x = (map4.begin()->second) & 0x01;
+	//	unsigned int add_y = ((map4.begin()->second) & 0x02) >> 1;
 
-	//// 矩形算法
-	//xypos YUXZHI = { grade_size.x * 0.4f, grade_size.y * 0.4f };
-	//float dx = x - left_x;
-	//float dy = y - top_y;
+	//	if (this->getChessData(left_top_row + add_y, left_top_col + add_x) != CHESS_NULL)
+	//		return False;
 
-	//if ((dx < YUXZHI.x || (grade_size.x - dx) < YUXZHI.x) && (dy < YUXZHI.y || (grade_size.y - dy) < YUXZHI.y)){
-	//	pos->col = (dx < grade_size.x * 0.5) ? left_top_col : (left_top_col + 1);
-	//	pos->row = (dy < grade_size.y * 0.5) ? left_top_row : (left_top_row + 1);
+	//	pos->row = left_top_row + add_y;
+	//	pos->col = left_top_col + add_x;
 	//	return True;
 	//}
-	//return False;//// 矩形算法
+	//return False;
+
+	// 矩形算法
+	xypos YUXZHI = { grade_size.x * 0.4f, grade_size.y * 0.4f };
+	float dx = x - left_x;
+	float dy = y - top_y;
+
+	if ((dx < YUXZHI.x || (grade_size.x - dx) < YUXZHI.x) && (dy < YUXZHI.y || (grade_size.y - dy) < YUXZHI.y)){
+		
+		int tmp_row = (dy < grade_size.y * 0.5) ? left_top_row : (left_top_row + 1);
+		int tmp_col  = (dx < grade_size.x * 0.5) ? left_top_col : (left_top_col + 1);
+		if (this->getChessData(tmp_row, tmp_col) != CHESS_NULL)
+			return False;
+
+		pos->row = tmp_row;
+		pos->col = tmp_col;
+
+		return True;
+	}
+	return False;//// 矩形算法
 
 }
 
@@ -166,7 +177,6 @@ bool Chess::checkWin()
 // 判断棋局是否结束
 bool Chess::checkOver(){
 	if (checkWin()) {
-		Sleep(1500);
 		if (playerFlag == CHESS_BLACK) {  //黑棋赢（玩家赢）,此时标记已经反转，轮到白棋落子
 			vector_man();
 		}
@@ -174,7 +184,6 @@ bool Chess::checkOver(){
 			vector_ai();
 		}
 
-		//_getch(); // 补充头文件 #include <conio.h>
 		return True;
 	}
 

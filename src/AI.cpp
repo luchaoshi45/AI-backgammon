@@ -40,7 +40,6 @@ void AI::go(Chess* chess){
 	Sleep(500); //假装思考
 	chess->set_chessMap(&pos, chees_color);
 	chess->chessDown(&pos, chees_color);
-	// Sleep(500); //落子声音思考
 }
 
 ChessPos AI::think(Chess* chess)

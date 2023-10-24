@@ -13,7 +13,8 @@
 #include "include.h"
 #include <math.h>
 #include <conio.h>
-#include<Windows.h>
+#include <Windows.h>
+
 
 typedef enum {
     CHESS_NULL = -1,
@@ -78,10 +79,18 @@ public:
         } 
     }
     void init() {
-        initgraph(win_resize, win_resize);
-        loadimage(0, "./res/img/chess/chess_13.png", win_resize, win_resize);
-        //mciSendString("open ./res/music/chun_shan_yue.mp3 alias BGM1", 0, 0, 0);
-        mciSendString("open ./res/music/llusionary_Daytime.mp3 alias BGM1", 0, 0, 0);
+        
+
+        //srand((unsigned)time(NULL)); // 设置随机数种子 伪随机
+        //float what_music = rand() / double(RAND_MAX);
+
+        WinRandom R;
+        float what_music = R.randInt() / float(INT_MAX);
+
+        if(what_music>0)
+            mciSendString("open ./res/music/chun_shan_yue.mp3 alias BGM1", 0, 0, 0);
+        else
+            mciSendString("open ./res/music/llusionary_Daytime.mp3 alias BGM1", 0, 0, 0);
         mciSendString("play BGM1 repeat", 0, 0, 0);
 
         mciSendString("open ./res/music/chess/chess.mp3 alias sfx_hit", NULL, 0, NULL);
@@ -89,7 +98,13 @@ public:
         loadimage(&chessBlackImg, "./res/img/piece/black.png", chess_size, chess_size, true);
         loadimage(&chessWhiteImg, "./res/img/piece/white.png", chess_size, chess_size, true);
         
-        chessMap_pad_null();
+        chessMap_pad_null(); //  初始化变量数据
+        lastPos.row = 0;
+        lastPos.col = 0;
+        playerFlag = CHESS_BLACK;
+        initgraph(win_resize, win_resize);
+
+        loadimage(0, "./res/img/chess/chess_13.png", win_resize, win_resize);
     }
     void chessDown_music() {
         int b = mciSendString("play sfx_hit from 1000", NULL, 0, NULL);
@@ -152,4 +167,9 @@ private:
 
 static void putimagePNG(int x, int y, IMAGE* picture); //x为载入图片的X坐标，y为Y坐标
 
+
+
+
+
 #endif //AI_BACKGAMMON_CHESS_H
+

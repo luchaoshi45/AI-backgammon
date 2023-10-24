@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AI backgammon", "AI backgammon.vcxproj", "{1F131B8B-9F03-42C5-BEE0-58CCDF3BCF65}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AI-backgammon-Setup", "AI-backgammon-Setup\AI-backgammon-Setup.vdproj", "{8490E2AB-816D-4DCA-BD16-F8496B37CE22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{1F131B8B-9F03-42C5-BEE0-58CCDF3BCF65}.Release|x64.Build.0 = Release|x64
 		{1F131B8B-9F03-42C5-BEE0-58CCDF3BCF65}.Release|x86.ActiveCfg = Release|Win32
 		{1F131B8B-9F03-42C5-BEE0-58CCDF3BCF65}.Release|x86.Build.0 = Release|Win32
+		{8490E2AB-816D-4DCA-BD16-F8496B37CE22}.Debug|x64.ActiveCfg = Debug
+		{8490E2AB-816D-4DCA-BD16-F8496B37CE22}.Debug|x86.ActiveCfg = Debug
+		{8490E2AB-816D-4DCA-BD16-F8496B37CE22}.Release|x64.ActiveCfg = Release
+		{8490E2AB-816D-4DCA-BD16-F8496B37CE22}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

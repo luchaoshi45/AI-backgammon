@@ -11,7 +11,9 @@ void ChessGame::play(){
 
     chess->init();
     ai->init(chess);
+    flushmessage(); // 清空消息队列
     while(True){
+
         man->go(chess);
         if(chess->checkOver()){
             break;
@@ -27,9 +29,9 @@ void ChessGame::play(){
 
 void ChessGame::run() {
     while (True) {
+
         play();
         Sleep(3000);
-        //break;
-        //_getch();
+
     }
 }
